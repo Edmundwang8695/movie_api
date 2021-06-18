@@ -7,6 +7,7 @@ http.createServer((request, response) => {
     let addr = request.url,
       q = url.parse(addr, true),
       filePath = '';
+      
 
     fs.appendFile('log.txt', 'URL: ' + addr +'\nTimestamp' + new Date() + '\n\n', (err) =>{
         if (err) {
@@ -29,7 +30,7 @@ http.createServer((request, response) => {
     response.write(data);
     response.end();
     });
-    
+
 }).listen(8080);
 
 console.log('my first Node test server is running on port 8080')
