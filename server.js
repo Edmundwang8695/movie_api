@@ -15,7 +15,7 @@ http.createServer((request, response) => {
             console.log('Added to log.');
         }
     });
-    
+
     if (q.pathname.includes('documentation')){
         filePath= (__dirname + '/documentation.html');
     } else {
@@ -25,10 +25,11 @@ http.createServer((request, response) => {
         if(err){
             throw err;
         }
-    Response.writeHead(200, {'Content-Type': 'text/html'});
-    Response.write(data);
-    Response.end();
-    })
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.write(data);
+    response.end();
+    });
+    
 }).listen(8080);
 
 console.log('my first Node test server is running on port 8080')
