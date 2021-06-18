@@ -3,17 +3,19 @@ url = require('url'),
 fs = require('fs');
 
 
-http.createServer((request, Response) => {
-    let addr = Request.url,
-    q= url.parse(addr, true),
-    filePath= '';
-    fs.appendFile('log.txt', 'URL: ' + addr +'\nTimestamp' + new Date() + \n\n, (err) =>{
+http.createServer((request, response) => {
+    let addr = request.url,
+      q = url.parse(addr, true),
+      filePath = '';
+
+    fs.appendFile('log.txt', 'URL: ' + addr +'\nTimestamp' + new Date() + '\n\n', (err) =>{
         if (err) {
             console.log(err)
         }else{
             console.log('Added to log.');
         }
-    })
+    });
+    
     if (q.pathname.includes('documentation')){
         filePath= (__dirname + '/documentation.html');
     } else {
@@ -27,7 +29,6 @@ http.createServer((request, Response) => {
     Response.write(data);
     Response.end();
     })
-}
 }).listen(8080);
 
 console.log('my first Node test server is running on port 8080')
