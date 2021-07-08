@@ -1,4 +1,76 @@
-To build the server-side component of a “movies” web application. The web
-application will provide users with access to information about different
-movies, directors, and genres. Users will be able to sign up, update their
-personal information, and create a list of their favorite movies.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Movie APi</h1>
+        <p>To build the server-side component of a “movies” web application. The web
+            application will provide users with access to information about different
+            movies, directors, and genres. Users will be able to sign up, update their
+            personal information, and create a list of their favorite movies.
+        </p>
+
+    <table>
+        <thead>
+            <th>Request</th>
+            <th>URL</th>
+            <th>Response</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Get a list of movies</td>
+                <td>/movies</td>
+                <td>A JSON object holding data about all the movies</td>
+            </tr>
+            <tr>
+                <td>Return director bio</td>
+                <td>/directors/[director name]</td>
+                <td>Return data about a director (bio, birth year, death year) by name</td>
+            </tr>
+            <tr>
+                <td>Return data about a single movie</td>
+                <td>/movies/[title of movie]</td>
+                <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
+            </tr>
+            <tr>
+                <td>Return data about a genre</td>
+                <td>/movies/genres/[genre]</td>
+                <td>Return data about a genre (description) by name/title </td>
+            </tr>
+            <tr>
+                <td>Allow new users to register</td>
+                <td>/sign-up</td>
+                <td>Allow new users to register for a new account</td>
+            </tr>
+            <tr>
+                <td>update user info</td>
+                <td>/users/[username]/update</td>
+                <td>Allow users to update their user info (username)</td>
+            </tr>
+            <tr>
+                <td>Add to favorites</td>
+                <td>/users/[username]/favorites/add-favorites</td>
+                <td>Allow users to add a movie to their list of favorites</td>
+            </tr>
+            <tr>
+                <td>Remove a movie from their list of favorites</td>
+                <td>/users/[username]/favorites/delete-favorites</td>
+                <td>Allow users to remove a movie from their list of favorites </td>
+            </tr>
+            <tr>
+                <td>Allow existing users to deregister</td>
+                <td>/users/[username]/deregister</td>
+                <td>Allow users to de-register</td>
+            </tr>
+        
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+		
