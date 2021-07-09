@@ -69,15 +69,15 @@ app.get("/documentation", (rep, res) =>{
     res.sendFile("public/documentation.html", { root: __dirname});
 });
 
-app.get("/directors/[director name]", (rep,res) =>{
+app.get("/directors/:director", (rep,res) =>{
     res.send("Successful GET request returning data on a specific director")
 });
 
-app.get("/movies/[title of movie]", (rep,res) =>{
+app.get("/movies/:title", (rep,res) =>{
     res.send("Successful GET request returning data on a specific Movie")
 });
 
-app.get("//movies/genres/[genre]", (rep,res) =>{
+app.get("//movies/genres/:genre", (rep,res) =>{
     res.send("Successful GET request returning data on genres")
 });
 
@@ -85,19 +85,19 @@ app.get("/sign-up", (rep,res) => {
     res.send("successful signed up")
 });
 
-app.get("/users/[username]/update", (rep,res) => {
+app.get("/users/:username/:update", (rep,res) => {
     res.send("successfuly updated user info/username")
 });
 
-app.get("/users/[username]/favorites/add-favorites", (rep,res) =>{
+app.get("/users/:username/:favorites/:add-favorites", (rep,res) =>{
     res.send("successfully added movie to favorite")
 });
 
-app.get("/users/[username]/favorites/delete-favorites", (rep,res) => {
+app.get("/users/:username/:favorites/:delete-favorites", (rep,res) => {
     res.send("successfully deleted favorite movie")
 });
 
-app.get("/users/[username]/deregister", (rep, res) =>{
+app.get("/users/:username/:deregister", (rep, res) =>{
     res.send("successfully deregistered")
 });
 
