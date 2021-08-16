@@ -7,6 +7,9 @@ const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 app.use(bodyParser.urlencoded({ extended: true }));
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -17,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('common'));
 
-app.get('/movies', (req, res) => {
+app.get('/movies',passport.authenticate('jwt', {session:false}), (req, res) => {
     Movies.find()
       .then((Movies) => {
         res.status(201).json(Movies);
@@ -32,11 +35,11 @@ app.get("/", (rep, res) =>{
     res.send("Welcome to my Movie API.")
 });
 
-app.get("/documentation", (rep, res) =>{
+app.get("/documentation",passport.authenticate('jwt', {session:false}),  (rep, res) =>{
     res.sendFile("public/documentation.html", { root: __dirname});
 });
 
-app.get('/movies/:Title', (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', {session:false}), (req, res) => {
     Movies.findOne({ Title: req.params.Title })
       .then((Movie) => {
         res.json(Movie);
@@ -55,7 +58,7 @@ app.get("/sign-up", (rep,res) => {
     res.send("successful signed up")
 });
 
-app.post('/users',(req,res) =>{
+app.post('/users',passport.authenticate('jwt', {session:false}), (req,res) =>{
     Users.findOne({Username:req.body.Username})
     .then((user) =>{
         if(user){
@@ -82,7 +85,7 @@ app.post('/users',(req,res) =>{
 });
 
 //get all users
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt', {session:false}),(req, res) => {
     Users.find()
       .then((users) => {
         res.status(201).json(users);
@@ -95,7 +98,7 @@ app.get('/users', (req, res) => {
 
 // get a user by user name
 
-app.get('/users/:Username', (req, res) => {
+app.get('/users/:Username',passport.authenticate('jwt', {session:false}),  (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then((user) => {
         res.json(user);
@@ -108,7 +111,7 @@ app.get('/users/:Username', (req, res) => {
 
 // Update a user's info by username
 
-app.put('/users/:Username', (req,res) => {
+app.put('/users/:Username',passport.authenticate('jwt', {session:false}),(req,res) => {
     Users.findOneAndUpdate({Username: req.params.Username}, {$set:
     {
         Usersname: req.body.Username,
@@ -128,7 +131,7 @@ app.put('/users/:Username', (req,res) => {
 });
 });
 
-app.post('/users/:username/:movies/:movieID', (req, res) => {
+app.post('/users/:username/:movies/:movieID', passport.authenticate('jwt', {session:false}), (req, res) => {
     Users.findOneAndUpdate({Username: req.params.Username}, {
         $push: {FavoriteMovies: req.params.MovieID}
     },
@@ -144,7 +147,7 @@ app.post('/users/:username/:movies/:movieID', (req, res) => {
 });
 
 // Delete a user by username
-app.delete('/users/:Username', (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', {session:false}), (req, res) => {
     Users.findOneAndRemove({ Username: req.params.Username })
       .then((user) => {
         if (!user) {
@@ -158,6 +161,51 @@ app.delete('/users/:Username', (req, res) => {
         res.status(500).send('Error: ' + err);
       });
   });
+
+app.get('/genres', passport.authenticate('jwt', {session:false}), (req,res) =>{
+  Genres.find()
+  .then((genres) => {
+    res.status(200).json(genre);
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+});
+
+app.get('/genres/:Name', passport.authenticate('jwt', {session:false}), (req,res)=>{
+  Genres.findOne({
+    Name:req.params.name
+  })
+  .then((genre) =>{
+    res.json(genre);
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+   });
+});
+
+app.get('/directors',passport.authenticate('jwt', {session:false}), (req,res)=>{
+  directors.fine(director)
+  .then((director) => {
+    res.status(200).json(director);
+  }).catch((err)=> {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+});
+
+app.get('/directors/:Name', passport.authenticate('jwt', {session:false}), (req,res)=>{
+  directors.findOne({
+    Name:req.params.name
+  })
+  .then((director) => {
+    res.status(200).json(director);
+  }).catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+});
+
 
 
 
