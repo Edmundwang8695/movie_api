@@ -156,12 +156,10 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session:false}), (r
   });
 
   app.get(
-    "/movies/genre/",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
+    "/movies/genre/",passport.authenticate("jwt", { session: false }),(req, res) => {
       Movies.find()
-        .then((movies) => {
-          res.json(movies.Genre);
+        .then((Genre) => {
+          res.json(Genre);
         })
         .catch((err) => {
           console.error(err);
