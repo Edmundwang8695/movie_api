@@ -1,0 +1,7 @@
+{"_id":{"$oid":"61023bdd6faa2e131bc3943d"},"Username":"Peter K","Password":"abcd12345","Email":"peterk123@yahoo.com","Birthday":{"$date":"1990-01-01T00:00:00Z"},"FavoriteMovies":[{"$oid":"610234946faa2e131bc39434"},{"$oid":"610234946faa2e131bc39439"}]}
+{"_id":{"$oid":"61023c6c6faa2e131bc3943f"},"Username":"kelsi m","Password":"123abc","Email":"kelsim123@gmail.com","Birthday":{"$date":"1988-01-17T00:00:00Z"},"FavoriteMovies":[{"$oid":"610234946faa2e131bc39437"},{"$oid":"610234946faa2e131bc39435"}]}
+{"_id":{"$oid":"61023d1d6faa2e131bc39440"},"Username":"Leanne L","Password":"123abc","Email":"Leannelee@gmail.com","Birthday":{"$date":"1994-01-17T00:00:00Z"},"FavoriteMovies":[{"$oid":"610234946faa2e131bc3943a"},{"$oid":"610234946faa2e131bc3943b"}]}
+{"_id":{"$oid":"61023d726faa2e131bc39441"},"Username":"Erica S","Password":"123abcd","Email":"ericas@gmail.com","Birthday":{"$date":"1991-08-27T00:00:00Z"},"FavoriteMovies":[{"$oid":"610234946faa2e131bc3943a"}]}
+{"_id":{"$oid":"6110aa04d3ac84340c5644b1"},"FavoriteMovies":[],"__v":0}
+{"_id":{"$oid":"6110d51ed37912150400d6a9"},"FavoriteMovies":[],"Username":"Alyssa K","Password":"abcd12","Email":"Alyssa123@yahoo.com","Birthday":{"$date":"1980-01-01T00:00:00Z"},"__v":0}
+{"_id":{"$oid":"61186dc4665ceb31d4ea72e1"},"FavoriteMovies":[],"Username":"wang","Email":"tester123@yahoo.com","Birthday":{"$date":"1990-01-01T00:00:00Z"},"__v":0,"Password":"tester"}
