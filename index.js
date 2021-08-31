@@ -28,12 +28,12 @@ let userSchema = mongoose.Schema({
   Birthday:Date,
   FavoriteMovies:[{type: mongoose.Schema.Types.ObjectId,ref: 'Movie'}]
 });
-user.Schema.statics.hashPassword = (pasword) =>{
-  return bcrypt.hashSync(pasword,10);
+user.Schema.statics.hashPassword = (password) =>{
+  return bcrypt.hashSync(password,10);
 };
 userSchema.methods.validatePassword = function(password){
   return bcrypt.compareSync(password,this.password);
-}
+};
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
