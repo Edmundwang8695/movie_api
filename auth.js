@@ -13,6 +13,8 @@ let generateJWTToken = (user) => {
     });
 }
 
+const Users = module.exports = mongoose.model('User', UsersSchema);
+
 module.exports = (router) => {
     router.post('/login', (req, res) => {
       passport.authenticate('local', { session: false }, (error, user, info) => {
