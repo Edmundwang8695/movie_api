@@ -87,7 +87,7 @@ check('Email', 'Email does not appear to be valid').isEmail()
 ],
 (req,res) =>{
   let errors = validationResult(req);
-  if(!error.isEmpty()){
+  if(!errors.isEmpty()){
     return res.status(422).json({errors: error.array()});
   }
   let hashedPassword = users.hashPassword(req.body.Password);
