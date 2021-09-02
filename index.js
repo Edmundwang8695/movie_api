@@ -41,7 +41,7 @@ require('./passport');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true }).catch(error => handleError(error));
 mongoose.set('bufferCommands', false);
 
 app.use(bodyParser.json());
