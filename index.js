@@ -20,21 +20,21 @@ app.use(cors());
 //     return callback(null,true);
 //   }
 // }));
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const { check, validationResult} = require ('express-validator');
-let userSchema = mongoose.Schema({
-  UserName: {type: String, require:true},
-  Password: {type:String, require:true},
-  Email: {type: String, require:true},
-  Birthday:Date,
-  FavoriteMovies:[{type: mongoose.Schema.Types.ObjectId,ref: 'Movie'}]
-});
-userSchema.statics.hashPassword = (password) =>{
-  return bcrypt.hashSync(password,10);
-};
-userSchema.methods.validatePassword = function(password){
-  return bcrypt.compareSync(password,this.password);
-};
+// let userSchema = mongoose.Schema({
+//   UserName: {type: String, require:true},
+//   Password: {type:String, require:true},
+//   Email: {type: String, require:true},
+//   Birthday:Date,
+//   FavoriteMovies:[{type: mongoose.Schema.Types.ObjectId,ref: 'Movie'}]
+// });
+// userSchema.statics.hashPassword = (password) =>{
+//   return bcrypt.hashSync(password,10);
+// };
+// userSchema.methods.validatePassword = function(password){
+//   return bcrypt.compareSync(password,this.password);
+// };
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
