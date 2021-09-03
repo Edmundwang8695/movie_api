@@ -8,33 +8,20 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 const cors= require('cors');
-app.use(cors());
-// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-// app.use(cors({
-//   origin:(origin, callback) =>{
-//     if(!origin) return callback(null,true);
-//     if(allowedOrigins.indexOf(origin) === -1){
-//       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-//       return callback (new Error(message), false);
-//     }
-//     return callback(null,true);
-//   }
-// }));
-// const bcrypt = require('bcrypt');
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+app.use(cors({
+  origin:(origin, callback) =>{
+    if(!origin) return callback(null,true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback (new Error(message), false);
+    }
+    return callback(null,true);
+  }
+}));
+const bcrypt = require('bcrypt');
 const { check, validationResult} = require ('express-validator');
-// let userSchema = mongoose.Schema({
-//   UserName: {type: String, require:true},
-//   Password: {type:String, require:true},
-//   Email: {type: String, require:true},
-//   Birthday:Date,
-//   FavoriteMovies:[{type: mongoose.Schema.Types.ObjectId,ref: 'Movie'}]
-// });
-// userSchema.statics.hashPassword = (password) =>{
-//   return bcrypt.hashSync(password,10);
-// };
-// userSchema.methods.validatePassword = function(password){
-//   return bcrypt.compareSync(password,this.password);
-// };
+
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
