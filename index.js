@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('common'));
 
-app.get('/movies', (req, res) => {
+app.get('/movies',passport.authenticate('jwt', {session:false}), (req, res) => {
     Movies.find()
       .then((Movies) => {
         res.status(201).json(Movies);
