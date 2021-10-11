@@ -154,9 +154,11 @@ app.put('/users/:Username',passport.authenticate('jwt', {session:false}),(req,re
 });
 });
 
+
+//add movie list
 app.post('/users/:username/:movies/:movieID', passport.authenticate('jwt', {session:false}), (req, res) => {
-    Users.findOneAndUpdate({Username: req.params.Username}, {
-        $push: {FavoriteMovies: req.params.MovieID}
+    Users.findOneAndUpdate({Username: req.params.username}, {
+        $push: {FavoriteMovies: req.params.movieID}
     },
     {new:true}, 
     (err,updatedUser) => {
@@ -168,6 +170,25 @@ app.post('/users/:username/:movies/:movieID', passport.authenticate('jwt', {sess
         }
     });
 });
+    // Allows user to delete movie
+
+    app.delete("/users/:userId/movies/:movieId", passport.authenticate('jwt',
+        { session: false }), (req, res) => {
+            Users.findById(req.params.userId)
+                .then((user) => {
+                    if (!user) {
+                        return res.status(404).send("User does not exist")
+                    }
+                    if (user.favoriteMovies && user.favoriteMovies.includes(req.params.movieId)) {
+                        user.favoriteMovies.remove(req.params.movieId)
+                        user.save(() => {
+                            res.send(req.params.movieId + "Movie was removed from Favorites")
+                        })
+                    } else {
+                        res.send("Movie was not found");
+                    }
+                });
+        });
 
 // Delete a user by username
 app.delete('/users/:Username', passport.authenticate('jwt', {session:false}), (req, res) => {
