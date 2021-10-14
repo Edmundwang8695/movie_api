@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 const cors= require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com','http://localhost:1234'];
 app.use(cors());
@@ -156,7 +156,7 @@ app.put('/users/:Username',passport.authenticate('jwt', {session:false}),(req,re
 
 
 //add movie list
-app.post('/users/:username/:movies/:movieID', passport.authenticate('jwt', {session:false}), (req, res) => {
+app.post('/users/:Username/:movies/:movieId', passport.authenticate('jwt', {session:false}), (req, res) => {
     Users.findOneAndUpdate({Username: req.params.username}, {
         $push: {FavoriteMovies: req.params.movieID}
     },
@@ -172,7 +172,7 @@ app.post('/users/:username/:movies/:movieID', passport.authenticate('jwt', {sess
 });
     // Allows user to delete movie
 
-    app.delete("/users/:userId/movies/:movieId", passport.authenticate('jwt',
+    app.delete("/users/:Username/movies/:movieId", passport.authenticate('jwt',
         { session: false }), (req, res) => {
             Users.findById(req.params.userId)
                 .then((user) => {
