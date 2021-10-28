@@ -156,9 +156,9 @@ app.put('/users/:Username',passport.authenticate('jwt', {session:false}),(req,re
 
 
 //add movie list
-app.post('/users/:Username/:movies/:movieId', passport.authenticate('jwt', {session:false}), (req, res) => {
-    Users.findOneAndUpdate({Username: req.params.username}, {
-        $push: {FavoriteMovies: req.params.movieID}
+app.post('/users/:Username/movies/:movieId', passport.authenticate('jwt', {session:false}), (req, res) => {
+    Users.findOneAndUpdate({Username: req.params.Username}, {
+        $push: {FavoriteMovies: req.params.movieId}
     },
     {new:true}, 
     (err,updatedUser) => {
@@ -174,7 +174,7 @@ app.post('/users/:Username/:movies/:movieId', passport.authenticate('jwt', {sess
 
     app.delete("/users/:Username/movies/:movieId", passport.authenticate('jwt',
         { session: false }), (req, res) => {
-            Users.findById(req.params.userId)
+            Users.findById(req.params.UserId)
                 .then((user) => {
                     if (!user) {
                         return res.status(404).send("User does not exist")
