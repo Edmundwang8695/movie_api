@@ -174,7 +174,7 @@ app.post('/users/:Username/movies/:movieId', passport.authenticate('jwt', {sessi
 
     app.delete("/users/:Username/movies/:movieId", passport.authenticate('jwt',
         { session: false }), (req, res) => {
-            Users.findById(req.params.Username)
+            Users.findById(req.params.UserId)
                 .then((user) => {
                     if (!user) {
                         return res.status(404).send("User does not exist")
